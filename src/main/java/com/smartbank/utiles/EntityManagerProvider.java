@@ -8,7 +8,7 @@ public class EntityManagerProvider {
 
     public static EntityManagerFactory getEntityManagerFactory() {
         if(emf == null) {
-            emf = Persistence.createEntityManagerFactory("default");
+            emf = Persistence.createEntityManagerFactory("smartbank");
         }
         return emf;
     }
