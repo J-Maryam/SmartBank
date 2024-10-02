@@ -1,4 +1,4 @@
-package org.example.smartbank;
+package com.smartbank;
 
 import java.io.*;
 import jakarta.servlet.http.*;
