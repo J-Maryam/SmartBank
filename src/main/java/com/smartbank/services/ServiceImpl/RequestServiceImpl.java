@@ -9,7 +9,7 @@ import java.util.List;
 public class RequestServiceImpl implements RequestService {
     private RequestRepository requestRepository;
 
-    RequestServiceImpl(RequestRepository requestRepository) {
+    public RequestServiceImpl(RequestRepository requestRepository) {
         this.requestRepository = requestRepository;
     }
 
@@ -20,7 +20,7 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public List<Request> findAll() {
-        return List.of();
+        return requestRepository.findAll();
     }
 
     @Override

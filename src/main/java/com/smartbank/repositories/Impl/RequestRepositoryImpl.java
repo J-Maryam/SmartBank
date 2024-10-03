@@ -19,17 +19,29 @@ public class RequestRepositoryImpl implements RequestRepository {
             transaction.begin();
             em.persist(request);
             transaction.commit();
-        }catch(Exception e) {
+        } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
             e.printStackTrace();
+        } finally {
+            em.close();
         }
     }
 
     @Override
     public List<Request> findAll() {
-        return List.of();
+        EntityManager em = EntityManagerProvider.getEntityManagerFactory().createEntityManager();
+        List<Request> requests = null;
+
+        try {
+            requests = em.createQuery("select r from Request r", Request.class).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return requests;
     }
 
     @Override
