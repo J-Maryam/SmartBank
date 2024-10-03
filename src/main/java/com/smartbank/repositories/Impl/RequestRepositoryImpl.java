@@ -46,6 +46,13 @@ public class RequestRepositoryImpl implements RequestRepository {
 
     @Override
     public Request findById(Long id) {
-        return null;
+        EntityManager em = EntityManagerProvider.getEntityManagerFactory().createEntityManager();
+        Request request = null;
+        try {
+            request = em.find(Request.class, id);
+        }finally {
+            em.close();
+        }
+        return request;
     }
 }

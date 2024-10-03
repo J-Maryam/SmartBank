@@ -25,6 +25,6 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public Request findById(Long id) {
-        return null;
+        return requestRepository.findById(id);
     }
 }
