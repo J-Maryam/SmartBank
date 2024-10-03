@@ -68,7 +68,23 @@ public class Request implements Serializable {
 
     public Request() {}
 
-    public Request(Long id, String firstName, String lastName, String cin, LocalDate birthDate, LocalDate startEmployementDate, Double monthlyIncome, Boolean hasActivateCredits, String email, String phoneNumber, String type, String position, String amount, int durationsInMonths, BigDecimal monthlyPayment) {}
+    public Request(Long id, String firstName, String lastName, String cin, LocalDate birthDate, LocalDate startEmployementDate, Double monthlyIncome, Boolean hasActivateCredits, String email, String phoneNumber, String type, String position, String amount, int durationsInMonths, BigDecimal monthlyPayment) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.cin = cin;
+        this.birthDate = birthDate;
+        this.startEmployementDate = startEmployementDate;
+        this.monthlyIncome = monthlyIncome;
+        this.hasActivateCredits = hasActivateCredits;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.type = type;
+        this.position = position;
+        this.amount = amount;
+        this.durationsInMonths = durationsInMonths;
+        this.monthlyPayment = monthlyPayment;
+    }
 
     public Long getId() {
         return id;
