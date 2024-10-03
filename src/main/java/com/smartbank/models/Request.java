@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,19 +17,53 @@ public class Request implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Le prénom ne peut pas être vide ou composé uniquement d'espaces")
+    @Size(min = 3, max = 50, message = "First name must be between 2 and 50 characters")
     private String firstName;
+
+    @NotBlank(message = "Le prénom ne peut pas être vide ou composé uniquement d'espaces")
+    @Size(min = 3, max = 50, message = "First name must be between 2 and 50 characters")
     private String lastName;
+
+    @NotBlank(message = "CIN ne peut pas être vide ou composé uniquement d'espaces")
     private String cin;
+
+    @Past(message = "BirthDate doit être au passé")
     private LocalDate birthDate;
+
+    @PastOrPresent(message = "StartEmployementDate doit être au passé ou au présent")
     private LocalDate startEmployementDate;
+
+    @NotNull(message = "Montant ne doit pas être null")
+    @Positive(message = "Le montant doit être positive")
     private Double monthlyIncome;
+
     private boolean hasActivateCredits;
+
+    @Email(message = "Email doit être valide")
+    @NotBlank(message = "Email ne doit etre vide ou composé uniquement d'espaces")
     private String email;
+
+    @NotNull(message = "Telephone ne doit pas être null")
+    @Pattern(regexp = "0[1-9][0-9]{8}", message = "Le numéro de téléphone doit commencer par '0' suivi de 9 autres chiffres")
     private String phoneNumber;
+
+    @NotBlank(message = "Type est obligatoire")
     private String type;
+
     private String position;
+
+    @NotNull(message = "Montant doit pas être null")
+    @Positive(message = "Le montant doit être positive")
     private String amount;
+
+    @Min(value = 12, message = "Duration must be at least 12 month")
+    @NotNull(message = "DurationsInMonths ne doit pas être null")
     private int durationsInMonths;
+
+    @NotNull(message = "Monthly payment ne doit pas être null")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Monthly payment doit être superieure à 0")
     private BigDecimal monthlyPayment;
 
     public void setId(Long id) {
