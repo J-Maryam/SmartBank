@@ -66,12 +66,16 @@ public class Request implements Serializable {
     @DecimalMin(value = "0.0", inclusive = false, message = "Monthly payment doit être superieure à 0")
     private BigDecimal monthlyPayment;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Request() {}
+
+    public Request(Long id, String firstName, String lastName, String cin, LocalDate birthDate, LocalDate startEmployementDate, Double monthlyIncome, Boolean hasActivateCredits, String email, String phoneNumber, String type, String position, String amount, int durationsInMonths, BigDecimal monthlyPayment) {}
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
