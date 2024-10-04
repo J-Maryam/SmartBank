@@ -71,7 +71,7 @@
                         <input type="range" min="1" max="80000" step="100" value="70" class="slider" id="mensualiteSlider">
                     </div>
                     <div class="flex-center">
-                        <a href="index2.html">
+                        <a href="step2.jsp">
                             <button class="button1 m-t-5">
                                 <p class="p-10">Continuer</p>
                                 <p class="p-2">Sans engagement</p>
