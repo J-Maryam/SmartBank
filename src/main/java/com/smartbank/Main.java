@@ -6,10 +6,6 @@ import com.smartbank.repositories.RequestRepository;
 import com.smartbank.services.RequestService;
 import com.smartbank.services.ServiceImpl.RequestServiceImpl;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
         RequestRepository requestRepository = new RequestRepositoryImpl();
