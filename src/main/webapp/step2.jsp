@@ -16,11 +16,11 @@
 <div>
     <div class="margin-x">
         <h1 class="titre-center m-t-lg">Demander mon crédit en ligne</h1>
-        <a class="d-flex gap-5 w-fit m-y-1" href="step1.jsp">
+        <a class="d-flex gap-5 w-fit m-y-1" href="${pageContext.request.contextPath}/simulate">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left"
                  viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
-                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"></path>
             </svg>
             <p class="p-4">Retour</p>
         </a>
@@ -40,7 +40,7 @@
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#FDDF35"
                              class="bi bi-caret-down-fill m-t-0" viewBox="0 0 16 16">
-                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path>
                         </svg>
                     </div>
                     <div class="w-30 third titre-center p-y-5 white">
@@ -48,24 +48,25 @@
                         <p class="p-1">Mes infos personnelles</p>
                     </div>
                 </div>
-                <div class="margin-x-1">
+                <form action="${pageContext.request.contextPath}/coordonnees" method="post">
+                    <div class="margin-x-1">
+                        <div class="m-t-5 input-container">
+                            <input type="email" name="email" id="email" placeholder="" class="custom-input" value="">
+                            <label for="email" class="custom-label">Email*</label>
+                        </div>
+                        <div class="m-t-9 input-container">
+                            <input type="text" name="phone" id="phone" placeholder="" class="custom-input" value="">
+                            <label for="phone" class="custom-label">Téléphone mobile*</label>
+                        </div>
 
-                    <div class="m-t-5 input-container">
-                        <input type="text" name="email" id="email" placeholder="" class="custom-input" value="">
-                        <label for="email" class="custom-label">Email*</label>
+                        <div class="flex-center">
+                            <button class="button1 m-t-5" type="submit">
+                                <p class="p-10">Continuer</p>
+                                <p class="p-2">Sans engagement</p>
+                            </button>
+                        </div>
                     </div>
-                    <div class="m-t-9 input-container">
-                        <input type="text" name="phone" id="phone" placeholder="" class="custom-input" value="">
-                        <label for="phone" class="custom-label">Téléphone mobile*</label>
-                    </div>
-
-                    <div class="flex-center">
-                        <button class="button1 m-t-5">
-                            <p class="p-10">Continuer</p>
-                            <p class="p-2">Sans engagement</p>
-                        </button>
-                    </div>
-                </div>
+                </form>
                 <div class="m-t-10">
                     <p class="color-four fs-1">Simulation à titre indicatif et non contractuelle. La mensualité minimale
                         est de 180 dirhams.
@@ -81,27 +82,80 @@
             <div class=" card w-20">
                 <p class="titre-center mon color-four">Mon récapitulatif</p>
                 <p class="color-four bg1 ">Mon projet</p>
-                <p class="color-first pret">Prêt Personnel</p>
+                <p class="color-first pret"><%= session.getAttribute("projectType") %></p>
                 <p class="color-four bg1 ">Détails de mon crédit</p>
                 <div class="data">
                     <p class="color-four fs2">Vous êtes:</p>
-                    <p class=" color-first fs2 fw">Fonctionnaire</p>
+                    <p class=" color-first fs2 fw"><%= session.getAttribute("position") %></p>
                 </div>
                 <div class="data">
                     <p class="color-four fs2">Montant:</p>
-                    <p class=" color-first fs2 fw">360 000 DH</p>
+                    <p class=" color-first fs2 fw"><%= session.getAttribute("amount") %> DH</p>
                 </div>
                 <div class="data">
                     <p class="color-four fs2">Durée:</p>
-                    <p class=" color-first fs2 fw">84 mois</p>
+                    <p class=" color-first fs2 fw"><%= session.getAttribute("durationsInMonths") %> mois</p>
                 </div>
                 <div class="data">
                     <p class="color-four fs2">Mensualité:</p>
-                    <p class=" color-first fs2 fw">5 735,59 DH</p>
+                    <p class=" color-first fs2 fw"><%= session.getAttribute("monthlyIncome")%> DH</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </body>
+<script>
+    function validateForm() {
+        // Récupérer les valeurs des champs
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        let errors = [];
+
+        // Valider l'email (doit contenir '@' et un domaine valide)
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            errors.push('Veuillez saisir une adresse email valide.');
+        }
+
+        const phonePattern = /^0[67][0-9]{8}$/;
+
+        if (phone.trim() === '') {
+            errors.push('Téléphone mobile est obligatoire.');
+        } else if (!phonePattern.test(phone)) {
+            errors.push('Le numéro de téléphone doit être un nombre de 10 chiffres, commencer par 0, et le deuxième chiffre doit être 6 ou 7.');
+        }
+
+
+        if (errors.length > 0) {
+            showModal(errors);
+            return false;
+        } else {
+            window.location.href = 'index3.html';
+            return false;
+        }
+    }
+
+    function showModal(errors) {
+        let errorList = document.getElementById('errorList');
+        errorList.innerHTML = '';
+
+        errors.forEach(error => {
+            let li = document.createElement('li');
+            li.style.marginBottom ='8px';
+            li.textContent = error;
+            errorList.appendChild(li);
+        });
+
+        let modal = document.getElementById('errorModal');
+        modal.style.display = 'block';
+    }
+
+    // Fermer la modale
+    function closeModal() {
+        let modal = document.getElementById('errorModal');
+        modal.style.display = 'none';
+
+    }
+</script>
 </html>

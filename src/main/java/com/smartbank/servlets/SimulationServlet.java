@@ -33,4 +33,16 @@ public class SimulationServlet extends HttpServlet {
 
         response.sendRedirect("step2.jsp");
     }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+
+        String projectType = (String) session.getAttribute("projectType");
+        String position = (String) session.getAttribute("position");
+        String amount = (String) session.getAttribute("amount");
+        int durationsInMonths = (Integer) session.getAttribute("durationsInMonths");
+        BigDecimal monthlyIncome = (BigDecimal) session.getAttribute("monthlyIncome");
+
+        response.sendRedirect("step2.jsp");
+    }
 }
