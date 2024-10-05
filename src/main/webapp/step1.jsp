@@ -51,7 +51,7 @@
                     <div class="margin-x-1">
                         <p class="label">Mon projet</p>
                         <label>
-                            <select class="minimal m-t-1" name="type">
+                            <select class="minimal m-t-1" name="projectType">
                                 <option value="pret-personnel">J'ai besoin de l'argent</option>
                                 <option value="pret-voiture-occasion">Je finance mon véhicule d'occasion</option>
                                 <option value="gestion-imprevus">Je gère mes imprévus</option>
@@ -73,24 +73,24 @@
 
                         <div class="slider-container">
                             <p class="label m-t-5">Montant (en DH)</p>
-                            <input class="input1 w-8" type="number" id="amount" name="amount" max="600000" min="5000"
+                            <input class="input1 w-8" type="number" id="sliderValue" name="amount" max="600000" min="5000"
                                    step="1000" value="5000">
                             <input type="range" min="5000" max="600000" step="1000" value="5000" class="slider"
-                                   id="amountSlider" oninput="document.getElementById('amount').value=this.value">
+                                   id="mySlider" oninput="document.getElementById('sliderValue').value=this.value">
 
                             <p class="label m-t-5">Durée (en mois)</p>
-                            <input class="input1 w-5" type="number" id="durationsInMonths" name="durationsInMonths"
+                            <input class="input1 w-5" type="number" id="durationValue" name="durationsInMonths"
                                    min="12" max="120" step="6" value="12">
                             <input type="range" min="12" max="120" step="6" value="12" class="slider"
-                                   id="durationsInMonthsSlider"
-                                   oninput="document.getElementById('durationsInMonths').value=this.value">
+                                   id="durationSlider"
+                                   oninput="document.getElementById('durationValue').value=this.value">
 
                             <p class="label m-t-5">Mensualités (en DH)</p>
-                            <input class="input1 w-9" type="number" id="monthlyIncome" name="monthlyIncome" min="1"
+                            <input class="input1 w-9" type="number" id="mensualiteValue" name="monthlyIncome" min="1"
                                    max="80000" value="70">
                             <input type="range" min="1" max="80000" step="100" value="70" class="slider"
-                                   id="monthlyIncomeSlider"
-                                   oninput="document.getElementById('monthlyIncome').value=this.value">
+                                   id="mensualiteSlider"
+                                   oninput="document.getElementById('mensualiteValue').value=this.value">
                         </div>
 
                         <div class="flex-center">
