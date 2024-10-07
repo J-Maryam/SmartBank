@@ -19,11 +19,11 @@ public class Request implements Serializable {
     private Long id;
 
     @NotBlank(message = "Le prénom ne peut pas être vide ou composé uniquement d'espaces")
-    @Size(min = 3, max = 50, message = "First name must be between 2 and 50 characters")
+    @Size(min = 3, max = 50, message = "First name must be between 3 and 50 characters")
     private String firstName;
 
     @NotBlank(message = "Le prénom ne peut pas être vide ou composé uniquement d'espaces")
-    @Size(min = 3, max = 50, message = "First name must be between 2 and 50 characters")
+    @Size(min = 3, max = 50, message = "First name must be between 3 and 50 characters")
     private String lastName;
 
     @NotBlank(message = "CIN ne peut pas être vide ou composé uniquement d'espaces")
@@ -49,6 +49,9 @@ public class Request implements Serializable {
     @Pattern(regexp = "0[1-9][0-9]{8}", message = "Le numéro de téléphone doit commencer par '0' suivi de 9 autres chiffres")
     private String phoneNumber;
 
+    @Pattern(regexp = "monsieur|madame|mademoiselle", message = "La civilité doit être 'monsieur', 'madame' ou 'mademoiselle'")
+    private String civility;
+
     @NotBlank(message = "Type est obligatoire")
     private String type;
 
@@ -68,7 +71,7 @@ public class Request implements Serializable {
 
     public Request() {}
 
-    public Request(Long id, String firstName, String lastName, String cin, LocalDate birthDate, LocalDate startEmployementDate, Double monthlyIncome, Boolean hasActivateCredits, String email, String phoneNumber, String type, String position, String amount, int durationsInMonths, BigDecimal monthlyPayment) {
+    public Request(Long id, String firstName, String lastName, String cin, LocalDate birthDate, LocalDate startEmployementDate, Double monthlyIncome, Boolean hasActivateCredits, String email, String phoneNumber, String civility, String type, String position, String amount, int durationsInMonths, BigDecimal monthlyPayment) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -79,6 +82,7 @@ public class Request implements Serializable {
         this.hasActivateCredits = hasActivateCredits;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.civility = civility;
         this.type = type;
         this.position = position;
         this.amount = amount;
@@ -164,6 +168,14 @@ public class Request implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getCivility() {
+        return civility;
+    }
+
+    public void setCivility(String civility) {
+        this.civility = civility;
     }
 
     public String getType() {
