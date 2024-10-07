@@ -45,13 +45,13 @@
                     </svg>
                 </div>
             </div>
-            <form action="" method="post">
+            <form action="${pageContext.request.contextPath}/personalInfo" method="post">
                 <div class="margin-x-1">
                     <div class="radio-container">
                         <label for="civility" class="radio-title">Civilité</label>
                         <div class="radio-group" id="civility">
                             <label class="custom-radio">
-                                <input type="radio" name="civility" value="monsieur" checked>
+                                <input type="radio" name="civility" value="monsieur" required>
                                 <div class="custom_field"></div>
                                 <span class="fs1 color-four">Monsieur</span>
                             </label>
@@ -69,35 +69,35 @@
                     </div>
 
                     <div class="m-t-5 input-container">
-                        <input type="text" name="lastName" id="lastName" placeholder="" class="custom-input" value="">
+                        <input type="text" name="lastName" id="lastName" placeholder="" class="custom-input" value="" required>
                         <label for="lastName" class="custom-label">Nom*</label>
                     </div>
                     <div class="m-t-9 input-container">
-                        <input type="text" name="firstName" id="firstName" placeholder="" class="custom-input" value="">
+                        <input type="text" name="firstName" id="firstName" placeholder="" class="custom-input" value="" required>
                         <label for="firstName" class="custom-label">Prénom*</label>
                     </div>
 
                     <div class="m-t-9 input-container">
-                        <input type="text" name="cin" id="cin" placeholder="" class="custom-input" value="">
+                        <input type="text" name="cin" id="cin" placeholder="" class="custom-input" value="" required>
                         <label for="cin" class="custom-label">Numéro CIN / Carte de séjour*</label>
                     </div>
 
                     <div class="m-t-9 input-container">
                         <input type="text" name="birthDate" id="birthDate" placeholder="JJ/MM/YYYY" class="custom-input"
-                               value="">
+                               value="" required>
                         <label for="birthDate" class="custom-label">Date de naissance*</label>
                     </div>
 
                     <div class="m-t-9 input-container">
                         <input type="text" name="startEmployementDate" id="startEmployementDate"
-                               placeholder="JJ/MM/YYYY" class="custom-input" value="">
+                               placeholder="JJ/MM/YYYY" class="custom-input" value="" required>
                         <label for="startEmployementDate" class="custom-label">Date d'embauche/début de
                             l'activité*</label>
                     </div>
 
                     <div class="m-t-9 input-container">
                         <input type="number" name="monthlyPayment" id="monthlyPayment" placeholder=""
-                               class="custom-input" value="">
+                               class="custom-input" value="" required>
                         <label for="monthlyPayment" class="custom-label">Total revenus mensuels (net en DH)*</label>
                     </div>
 
@@ -105,7 +105,7 @@
                         <label for="hasActivateCredits" class="radio-title">Avez-vous des crédits en cours ?</label>
                         <div class="radio-group" id="hasActivateCredits">
                             <label class="custom-radio">
-                                <input type="radio" name="hasActivateCredits" value="oui" checked>
+                                <input type="radio" name="hasActivateCredits" value="oui" required>
                                 <div class="custom_field"></div>
                                 <span class="fs1 color-four">Oui</span>
                             </label>
@@ -150,7 +150,7 @@
             </div>
             <div class="data">
                 <p class="color-four fs2">Téléphone:</p>
-                <p class=" color-first fs2 fw"><%= session.getAttribute("phone")%> </p>
+                <p class=" color-first fs2 fw"><%= session.getAttribute("phoneNumber")%> </p>
             </div>
             <p class="color-four bg1 ">Détails de mon crédit</p>
             <div class="data">

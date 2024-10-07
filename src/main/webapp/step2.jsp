@@ -51,11 +51,11 @@
                 <form action="${pageContext.request.contextPath}/coordonnees" method="post">
                     <div class="margin-x-1">
                         <div class="m-t-5 input-container">
-                            <input type="email" name="email" id="email" placeholder="" class="custom-input" value="">
+                            <input type="email" name="email" id="email" placeholder="" class="custom-input" value="" required>
                             <label for="email" class="custom-label">Email*</label>
                         </div>
                         <div class="m-t-9 input-container">
-                            <input type="text" name="phone" id="phone" placeholder="" class="custom-input" value="">
+                            <input type="text" name="phoneNumber" id="phone" placeholder="" class="custom-input" value="" required>
                             <label for="phone" class="custom-label">Téléphone mobile*</label>
                         </div>
 
