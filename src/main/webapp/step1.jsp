@@ -73,7 +73,8 @@
 
                         <div class="slider-container">
                             <p class="label m-t-5">Montant (en DH)</p>
-                            <input class="input1 w-8" type="number" id="sliderValue" name="amount" max="600000" min="5000"
+                            <input class="input1 w-8" type="number" id="sliderValue" name="amount" max="600000"
+                                   min="5000"
                                    step="1000" value="5000" required>
                             <input type="range" min="5000" max="600000" step="1000" value="5000" class="slider"
                                    id="mySlider" oninput="document.getElementById('sliderValue').value=this.value">
@@ -109,8 +110,8 @@
                     <p class="color-four fs-1 m-t-4">Conformément à la loi 09-08, vous disposez d’un droit d’accès, de
                         rectification et d’opposition
                         au traitement de vos données personnelles. Ce traitement est autorisé par la CNDP sous le numéro
-                        A-GC-206/2014.</p>
-
+                        A-GC-206/2014.
+                    </p>
                 </div>
             </div>
             <div class=" card w-20">
