@@ -16,7 +16,7 @@ public class SimulationServlet extends HttpServlet {
         String position = request.getParameter("position");
         String amount = request.getParameter("amount");
         int durationsInMonths = Integer.parseInt(request.getParameter("durationsInMonths"));
-        BigDecimal monthlyIncome = BigDecimal.valueOf(Double.parseDouble(request.getParameter("monthlyIncome")));
+        Double monthlyIncome = Double.parseDouble(request.getParameter("monthlyIncome"));
 
         HttpSession session = request.getSession();
         session.setAttribute("projectType", projectType);
