@@ -7,6 +7,6 @@
     <display-name>SmartBank</display-name>
 
     <welcome-file-list>
-        <welcome-file>step1.jsp</welcome-file>
+        <welcome-file>requests.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
