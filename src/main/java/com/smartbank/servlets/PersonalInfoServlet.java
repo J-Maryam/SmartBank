@@ -79,7 +79,7 @@ public class PersonalInfoServlet extends HttpServlet {
 
         try {
             requestService.save(newRequest);
-            request.setAttribute("successMessage", "Votre demande a été soumise avec succès !");
+            request.setAttribute("successMe ssage", "Votre demande a été soumise avec succès !");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Une erreur est survenue lors de la soumission de votre demande.");

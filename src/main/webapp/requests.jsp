@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +7,7 @@
         body {
             padding: 2%;
         }
+
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -62,7 +64,9 @@
             border-bottom: 1px solid #ddd;
         }
 
-        #myInput:focus {outline: 3px solid #ddd;}
+        #myInput:focus {
+            outline: 3px solid #ddd;
+        }
 
         .dropdown {
             position: relative;
@@ -86,9 +90,13 @@
             display: block;
         }
 
-        .dropdown a:hover {background-color: #ddd;}
+        .dropdown a:hover {
+            background-color: #ddd;
+        }
 
-        .show {display: block;}
+        .show {
+            display: block;
+        }
 
         .topnav {
             overflow: hidden;
@@ -199,17 +207,19 @@
         <th>Mensualités (en DH)</th>
         <th></th>
     </tr>
-    <tr>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
-        <td>
-            <div class="btn-group">
-                <button class="button">Details</button>
-                <button class="button">Update</button>
-            </div>
-        </td>
-    </tr>
+    <c:forEach var="request" items="${requestList}">
+        <tr>
+            <td>${request.firstName} ${request.lastName}</td>
+            <td>${request.type}</td>
+            <td>${request.monthlyPayment}</td>
+            <td>
+                <div class="btn-group">
+                    <button class="button">Details</button>
+                    <button class="button">Update</button>
+                </div>
+            </td>
+        </tr>
+    </c:forEach>
 </table>
 
 </body>

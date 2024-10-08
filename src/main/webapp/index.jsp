@@ -8,5 +8,9 @@
 <h1><%= "Hello World!" %></h1>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
+
+<form action="${pageContext.request.contextPath}/requests" method="get">
+  <button type="submit">Toutes les Demandes</button>
+</form>
 </body>
 </html>
