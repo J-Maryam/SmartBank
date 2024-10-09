@@ -1,18 +1,21 @@
 package com.smartbank.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-public class Request implements Serializable {
+//public class Request implements Serializable {
+public class Request  {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,6 +71,9 @@ public class Request implements Serializable {
     @NotNull(message = "Monthly payment ne doit pas être null")
     @DecimalMin(value = "0.0", inclusive = false, message = "Monthly payment doit être superieure à 0")
     private BigDecimal monthlyPayment;
+
+    @OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
+    private List<RequestStatus> requestStatuses = new ArrayList<>();
 
     public Request() {}
 

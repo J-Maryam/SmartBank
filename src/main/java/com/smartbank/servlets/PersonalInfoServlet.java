@@ -1,6 +1,7 @@
 package com.smartbank.servlets;
 
 import com.smartbank.models.Request;
+import com.smartbank.models.Status;
 import com.smartbank.repositories.Impl.RequestRepositoryImpl;
 import com.smartbank.repositories.RequestRepository;
 import com.smartbank.services.RequestService;
@@ -79,7 +80,14 @@ public class PersonalInfoServlet extends HttpServlet {
 
         try {
             requestService.save(newRequest);
-            request.setAttribute("successMe ssage", "Votre demande a été soumise avec succès !");
+            request.setAttribute("newRequest", newRequest);
+
+            String statusStr = request.getParameter("status");
+            Status newStatus = new Status();
+            newStatus.setStatus(statusStr);
+
+
+            request.setAttribute("successMessage", "Votre demande a été soumise avec succès !");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Une erreur est survenue lors de la soumission de votre demande.");

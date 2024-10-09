@@ -5,12 +5,20 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class RequestStatus implements Serializable {
+@Entity
+public class RequestStatus  {
 
-    @ManyToMany
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn( name = "request_id")
     private Request request;
 
-    @ManyToMany
+
+    @ManyToOne
+    @JoinColumn( name = "status_id")
     private Status status;
 
     private LocalDate StatusDate;

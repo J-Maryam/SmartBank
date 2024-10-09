@@ -1,12 +1,13 @@
 package com.smartbank.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Status implements Serializable {
@@ -18,6 +19,9 @@ public class Status implements Serializable {
     @NotBlank(message = "Statut ne doit etre null")
     private String status;
 
+    @OneToMany(mappedBy = "status", cascade = CascadeType.ALL)
+    private List<RequestStatus> requestStatuses = new ArrayList<>();
+//    private Set<RequestStatus> requestStatuses = new HashSet<>();
     public Status() {}
 
     public Status(Long id, String status) {
@@ -40,4 +44,19 @@ public class Status implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public List<RequestStatus> getRequestStatuses() {
+        return requestStatuses;
+    }
+
+    public void setRequestStatuses(List<RequestStatus> requestStatuses) {
+        this.requestStatuses = requestStatuses;
+    }
+
+//    public Set<RequestStatus> getRequestStatuses() {
+//        return requestStatuses;
+//    }
+//    public void setRequestStatuses(Set<RequestStatus> requestStatuses) {
+//        this.requestStatuses = requestStatuses;
+//    }
 }
