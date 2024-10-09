@@ -5,9 +5,10 @@ import com.smartbank.repositories.RequestRepository;
 import com.smartbank.services.RequestService;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RequestServiceImpl implements RequestService {
-    private RequestRepository requestRepository;
+    private final RequestRepository requestRepository;
 
     public RequestServiceImpl(RequestRepository requestRepository) {
         this.requestRepository = requestRepository;
@@ -25,6 +26,7 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public Request findById(Long id) {
-        return requestRepository.findById(id);
+        Optional<Request> optionalRequest = requestRepository.findById(id);
+        return optionalRequest.orElse(null);
     }
 }

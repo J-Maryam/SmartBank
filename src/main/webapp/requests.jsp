@@ -1,8 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+    <title>List of Requests</title>
     <style>
         body {
             padding: 2%;
@@ -11,7 +12,7 @@
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
-            width: 80%;
+            width: 100%;
             margin: auto;
         }
 
@@ -94,10 +95,6 @@
             background-color: #ddd;
         }
 
-        .show {
-            display: block;
-        }
-
         .topnav {
             overflow: hidden;
             background-color: darkgray;
@@ -169,15 +166,114 @@
         .btn-group .button:hover {
             background-color: gray;
         }
+
+        .table-container {
+            width: 100%;
+            margin: auto;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: Tahoma, Arial, sans-serif;
+            color: #06D85F;
+            margin: 80px 0;
+        }
+
+        .box {
+            width: 40%;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 35px;
+            border: 2px solid #fff;
+            border-radius: 20px/50px;
+            background-clip: padding-box;
+            text-align: center;
+        }
+
+        .button {
+            font-size: 1em;
+            padding: 10px;
+            color: #fff;
+            border: 2px solid #06D85F;
+            border-radius: 20px/50px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease-out;
+        }
+
+        .button:hover {
+            background: #06D85F;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .overlay:target {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 30%;
+            position: relative;
+            transition: all 5s ease-in-out;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .popup .close:hover {
+            color: #06D85F;
+        }
+
+        .popup .content {
+            max-height: 30%;
+            overflow: auto;
+        }
+
+        .updateForm {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
 
 <div class="filter">
     <div class="topnav">
-        <a class="active" href="#home">Filter by Date: </a>
+        <a class="active">Filter by Date: </a>
         <div class="search-container">
-            <form action="/action_page.php">
+            <form>
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><i class="fa fa-search"></i>Search</button>
             </form>
@@ -200,29 +296,107 @@
 
 <h2>Request List</h2>
 
-<table>
-    <tr>
-        <th>Client</th>
-        <th>Request</th>
-        <th>Mensualités (en DH)</th>
-        <th></th>
-    </tr>
-    <c:forEach var="request" items="${requestList}">
+<div class="table-container">
+    <table>
         <tr>
-            <td>${request.firstName} ${request.lastName}</td>
-            <td>${request.type}</td>
-            <td>${request.monthlyPayment}</td>
-            <td>
-                <div class="btn-group">
-                    <button class="button">Details</button>
-                    <button class="button">Update</button>
-                </div>
-            </td>
+            <th>Client</th>
+            <th>CIN</th>
+            <th>Date de naissance</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Civilité</th>
+            <th>Type de demande</th>
+            <th>Position</th>
+            <th>Date d'embauche/Début de l'activité</th>
+            <th>Montant</th>
+            <th>Durée</th>
+            <th>Mensualités (en DH)</th>
+            <th>Total revenus mensuels (en DH)</th>
+            <th>Crédit (hasActivateCredits)</th>
+            <th></th>
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach var="request" items="${requestList}">
+            <tr>
+                <td>${request.firstName} ${request.lastName}</td>
+                <td>${request.cin}</td>
+                <td>${request.birthDate}</td>
+                <td>${request.email}</td>
+                <td>${request.phoneNumber}</td>
+                <td>${request.civility}</td>
+                <td>${request.type}</td>
+                <td>${request.position}</td>
+                <td>${request.startEmployementDate}</td>
+                <td>${request.amount}</td>
+                <td>${request.durationsInMonths}</td>
+                <td>${request.monthlyIncome}</td>
+                <td>${request.monthlyPayment}</td>
+                <td>${request.hasActivateCredits}</td>
+                <td>
+                    <div class="btn-group">
+                        <form action="${pageContext.request.contextPath}/details" method="get">
+                            <a class="button" href="#popup1">Details</a>
+                        </form>
+                        <form>
+                            <a class="button" href="#popup2">Update Status</a>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
+
+<%--list of request status--%>
+<div id="popup1" class="overlay">
+    <div class="popup">
+        <h3>Historiques de demande de crédit</h3>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+            <table>
+                <tr>
+                    <th>Demande</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Justification</th>
+                </tr>
+                <tr>
+                    <td>Maison</td>
+                    <td>Refuse</td>
+                    <td>01/08/2024</td>
+                    <td>Cz</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%--for to modify request status--%>
+<div id="popup2" class="overlay">
+    <div class="popup">
+        <h3>Modifier la statut de la demande</h3>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+            <div class="updateForm">
+                <form>
+                    <label for="status">Country</label>
+                    <select id="status" name="status">
+                        <option value="pending">En attente</option>
+                        <option value="accepted">Accepté</option>
+                        <option value="refused">Refusé</option>
+                    </select>
+
+                    <label for="justification">First Name</label>
+                    <input type="text" id="justification" name="justification" placeholder="Your justification..">
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
+
 <script>
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");

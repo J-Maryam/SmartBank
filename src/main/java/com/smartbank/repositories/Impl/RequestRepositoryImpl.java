@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RequestRepositoryImpl implements RequestRepository {
     @Override
@@ -45,14 +46,17 @@ public class RequestRepositoryImpl implements RequestRepository {
     }
 
     @Override
-    public Request findById(Long id) {
+    public Optional<Request> findById(Long id) {
         EntityManager em = EntityManagerProvider.getEntityManagerFactory().createEntityManager();
         Request request = null;
         try {
             request = em.find(Request.class, id);
+            return Optional.of(request);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
         }finally {
             em.close();
         }
-        return request;
     }
 }
