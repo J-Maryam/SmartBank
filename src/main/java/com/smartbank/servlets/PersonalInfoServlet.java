@@ -6,6 +6,8 @@ import com.smartbank.repositories.Impl.RequestRepositoryImpl;
 import com.smartbank.repositories.RequestRepository;
 import com.smartbank.services.RequestService;
 import com.smartbank.services.ServiceImpl.RequestServiceImpl;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,7 +21,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @WebServlet("/personalInfo")
+@RequestScoped
 public class PersonalInfoServlet extends HttpServlet {
+
+    @Inject
+    private RequestService requestService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -74,9 +80,6 @@ public class PersonalInfoServlet extends HttpServlet {
         newRequest.setStartEmployementDate(startEmployementDate);
         newRequest.setMonthlyPayment(monthlyPayment);
         newRequest.setHasActivateCredits(hasActivateCredits);
-
-        RequestRepository requestRepository = new RequestRepositoryImpl();
-        RequestService requestService = new RequestServiceImpl(requestRepository);
 
         try {
             requestService.save(newRequest);

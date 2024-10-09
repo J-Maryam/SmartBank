@@ -5,22 +5,25 @@ import com.smartbank.repositories.Impl.StatusRepositoryImpl;
 import com.smartbank.repositories.StatusRepository;
 import com.smartbank.services.ServiceImpl.StatusServiceImpl;
 import com.smartbank.services.StatusService;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+@RequestScoped
 public class StatusServlet extends HttpServlet {
+
+    @Inject
+    private StatusService statusService;
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         String status = req.getParameter("status");
 
         Status newStatus = new Status();
         newStatus.setStatus(status);
-
-        StatusRepository statusRepository = new StatusRepositoryImpl();
-        StatusService statusService = new StatusServiceImpl(statusRepository);
 
         try {
             statusService.save(newStatus);

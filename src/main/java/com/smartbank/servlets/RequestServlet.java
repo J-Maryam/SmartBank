@@ -5,6 +5,8 @@ import com.smartbank.repositories.Impl.RequestRepositoryImpl;
 import com.smartbank.repositories.RequestRepository;
 import com.smartbank.services.RequestService;
 import com.smartbank.services.ServiceImpl.RequestServiceImpl;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,13 +17,14 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/requests")
+@RequestScoped
 public class RequestServlet extends HttpServlet {
+
+    @Inject
+    private RequestService requestService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        RequestRepository requestRepository = new RequestRepositoryImpl();
-        RequestService requestService = new RequestServiceImpl(requestRepository);
-
         List<Request> requestList = requestService.findAll();
         req.setAttribute("requestList", requestList);
         req.getRequestDispatcher("requests.jsp").forward(req, resp);

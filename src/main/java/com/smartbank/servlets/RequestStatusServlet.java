@@ -7,6 +7,8 @@ import com.smartbank.repositories.Impl.RequestStatusRepositoryImpl;
 import com.smartbank.repositories.RequestStatusRepository;
 import com.smartbank.services.RequestStatusService;
 import com.smartbank.services.ServiceImpl.RequestStatusServiceImpl;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +17,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 
+@RequestScoped
 public class RequestStatusServlet extends HttpServlet {
+
+    @Inject
+    private RequestStatusService requestStatusService;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -28,9 +34,6 @@ public class RequestStatusServlet extends HttpServlet {
         requestStatus.setStatus(status);
         requestStatus.setStatusDate(LocalDate.now());
         requestStatus.setJustification(justification);
-
-        RequestStatusRepository requestStatusRepository = new RequestStatusRepositoryImpl();
-        RequestStatusService requestStatusService = new RequestStatusServiceImpl(requestStatusRepository);
 
         try {
             requestStatusService.save(requestStatus);
