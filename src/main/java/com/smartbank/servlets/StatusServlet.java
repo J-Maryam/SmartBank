@@ -1,9 +1,6 @@
 package com.smartbank.servlets;
 
 import com.smartbank.models.Status;
-import com.smartbank.repositories.Impl.StatusRepositoryImpl;
-import com.smartbank.repositories.StatusRepository;
-import com.smartbank.services.ServiceImpl.StatusServiceImpl;
 import com.smartbank.services.StatusService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -17,8 +14,9 @@ import java.io.IOException;
 public class StatusServlet extends HttpServlet {
 
     @Inject
-    private StatusService statusService;
+    StatusService statusService;
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         String status = req.getParameter("status");
 
