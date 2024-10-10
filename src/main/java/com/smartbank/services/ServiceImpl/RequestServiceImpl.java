@@ -3,11 +3,13 @@ package com.smartbank.services.ServiceImpl;
 import com.smartbank.models.Request;
 import com.smartbank.repositories.RequestRepository;
 import com.smartbank.services.RequestService;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequestScoped
 public class RequestServiceImpl implements RequestService {
     @Inject
     private RequestRepository requestRepository;

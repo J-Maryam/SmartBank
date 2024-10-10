@@ -1,11 +1,15 @@
 package com.smartbank.servlets;
 
 import com.smartbank.models.Request;
+import com.smartbank.models.RequestStatus;
 import com.smartbank.models.Status;
 import com.smartbank.repositories.Impl.RequestRepositoryImpl;
 import com.smartbank.repositories.RequestRepository;
 import com.smartbank.services.RequestService;
+import com.smartbank.services.RequestStatusService;
 import com.smartbank.services.ServiceImpl.RequestServiceImpl;
+import com.smartbank.services.ServiceImpl.RequestStatusServiceImpl;
+import com.smartbank.services.StatusService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
@@ -26,6 +30,10 @@ public class PersonalInfoServlet extends HttpServlet {
 
     @Inject
     private RequestService requestService;
+    @Inject
+    private StatusService statusService;
+    @Inject
+    private RequestStatusService requestStatusService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -51,8 +59,7 @@ public class PersonalInfoServlet extends HttpServlet {
         LocalDate startEmployementDate = LocalDate.parse(startEmployementDateStr, formatter);
         String monthlyPaymentStr = request.getParameter("monthlyPayment");
         BigDecimal monthlyPayment = new BigDecimal(monthlyPaymentStr);
-        String hasActivateCreditsStr = request.getParameter("hasActivateCredits");
-        boolean hasActivateCredits = Boolean.parseBoolean(hasActivateCreditsStr);
+        boolean hasActivateCredits = Boolean.parseBoolean(request.getParameter("hasActivateCredits"));
 
         System.out.println("Civility: " + civility);
         System.out.println("First Name: " + firstName);
@@ -83,12 +90,22 @@ public class PersonalInfoServlet extends HttpServlet {
 
         try {
             requestService.save(newRequest);
-            request.setAttribute("newRequest", newRequest);
+//            request.setAttribute("newRequest", newRequest);
 
-            String statusStr = request.getParameter("status");
-            Status newStatus = new Status();
-            newStatus.setStatus(statusStr);
+            Long requestId = newRequest.getId();
+            Status status = statusService.findByStatus("En attente");
+            if (status == null) {
+                throw new ServletException("Status not found");
+            }
+            Long statusId = status.getId();
 
+            RequestStatus requestStatus = new RequestStatus();
+            requestStatus.setRequest(newRequest);
+            requestStatus.setStatus(status);
+            requestStatus.setStatusDate(LocalDate.now());
+            requestStatus.setJustification("Demande en attente de traitement.");
+
+            requestStatusService.save(requestStatus);
 
             request.setAttribute("successMessage", "Votre demande a été soumise avec succès !");
         } catch (Exception e) {
