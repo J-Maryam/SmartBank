@@ -333,7 +333,7 @@
                 <td>${request.hasActivateCredits}</td>
                 <td>
                     <div class="btn-group">
-                        <form action="${pageContext.request.contextPath}/details" method="get">
+                        <form action="${pageContext.request.contextPath}/details">
                             <a class="button" href="#popup1">Details</a>
                         </form>
                         <form>

@@ -2,14 +2,22 @@ package com.smartbank.repositories.Impl;
 
 import com.smartbank.models.Request;
 import com.smartbank.repositories.RequestRepository;
+import com.smartbank.services.StatusService;
 import com.smartbank.utiles.EntityManagerProvider;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequestScoped
 public class RequestRepositoryImpl implements RequestRepository {
+
+    @Inject
+    private StatusService statusService;
+
     @Override
     public void save(Request request) {
         EntityManager em = EntityManagerProvider.getEntityManagerFactory().createEntityManager();

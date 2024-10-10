@@ -8,8 +8,7 @@ import com.smartbank.services.ServiceImpl.RequestServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        RequestRepository requestRepository = new RequestRepositoryImpl();
-        RequestService requestService = new RequestServiceImpl(requestRepository);
+        RequestService requestService = new RequestServiceImpl();
 
 //        Request request = new Request();
 //        request.setFirstName("Jonyr");

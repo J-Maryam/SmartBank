@@ -105,12 +105,12 @@
                         <label for="hasActivateCredits" class="radio-title">Avez-vous des crédits en cours ?</label>
                         <div class="radio-group" id="hasActivateCredits">
                             <label class="custom-radio">
-                                <input type="radio" name="hasActivateCredits" value="oui" required>
+                                <input type="radio" name="hasActivateCredits" value="true" required>
                                 <div class="custom_field"></div>
                                 <span class="fs1 color-four">Oui</span>
                             </label>
                             <label class="custom-radio">
-                                <input type="radio" name="hasActivateCredits" value="non">
+                                <input type="radio" name="hasActivateCredits" value="false" required>
                                 <div class="custom_field"></div>
                                 <span class="fs1 color-four">Non</span>
                             </label>

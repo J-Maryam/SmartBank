@@ -9,8 +9,12 @@
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
 
-<form action="${pageContext.request.contextPath}/requests" method="get">
+<form action="${pageContext.request.contextPath}/requests">
   <button type="submit">Toutes les Demandes</button>
+</form>
+
+<form action="${pageContext.request.contextPath}/step1.jsp">
+  <button type="submit">demander un credit</button>
 </form>
 </body>
 </html>
