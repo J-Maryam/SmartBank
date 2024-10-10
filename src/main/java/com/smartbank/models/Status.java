@@ -17,6 +17,7 @@ public class Status implements Serializable {
     private Long id;
 
     @NotBlank(message = "Statut ne doit etre null")
+    @Column(unique = true, nullable = false)
     private String status;
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL)
