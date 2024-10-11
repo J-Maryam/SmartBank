@@ -5,7 +5,8 @@ import com.smartbank.repositories.RequestStatusRepository;
 import com.smartbank.utiles.EntityManagerProvider;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import org.hibernate.Transaction;
+
+import java.util.List;
 
 public class RequestStatusRepositoryImpl implements RequestStatusRepository {
     @Override
@@ -26,5 +27,14 @@ public class RequestStatusRepositoryImpl implements RequestStatusRepository {
         }finally {
             em.close();
         }
+    }
+
+    @Override
+    public List<RequestStatus> findAllByRequestId(Long requestId) {
+        String query = "Select rs from RequestStatus rs where rs.request.id = :request_id";
+        EntityManager em = EntityManagerProvider.getEntityManagerFactory().createEntityManager();
+        return em.createQuery(query, RequestStatus.class)
+                .setParameter("request_id", requestId)
+                .getResultList();
     }
 }

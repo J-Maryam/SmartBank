@@ -75,6 +75,14 @@ public class Request  {
     @OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
     private List<RequestStatus> requestStatuses = new ArrayList<>();
 
+    public List<RequestStatus> getRequestStatuses() {
+        return requestStatuses;
+    }
+
+    public void setRequestStatuses(List<RequestStatus> requestStatuses) {
+        this.requestStatuses = requestStatuses;
+    }
+
     public Request() {}
 
     public Request(Long id, String firstName, String lastName, String cin, LocalDate birthDate, LocalDate startEmployementDate, Double monthlyIncome, Boolean hasActivateCredits, String email, String phoneNumber, String civility, String type, String position, String amount, int durationsInMonths, BigDecimal monthlyPayment) {

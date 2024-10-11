@@ -7,6 +7,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
+import java.util.List;
+
 @ApplicationScoped
 public class RequestStatusServiceImpl implements RequestStatusService {
 
@@ -16,5 +18,10 @@ public class RequestStatusServiceImpl implements RequestStatusService {
     @Override
     public void save(RequestStatus requestStatus) {
         requestStatusRepository.save(requestStatus);
+    }
+
+    @Override
+    public List<RequestStatus> findAllByRequestId(Long requestId) {
+        return requestStatusRepository.findAllByRequestId(requestId);
     }
 }

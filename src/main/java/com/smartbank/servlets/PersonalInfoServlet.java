@@ -10,6 +10,7 @@ import com.smartbank.services.RequestStatusService;
 import com.smartbank.services.ServiceImpl.RequestServiceImpl;
 import com.smartbank.services.ServiceImpl.RequestStatusServiceImpl;
 import com.smartbank.services.StatusService;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
@@ -25,7 +26,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @WebServlet("/personalInfo")
-@RequestScoped
+@ApplicationScoped
 public class PersonalInfoServlet extends HttpServlet {
 
     @Inject
@@ -106,6 +107,7 @@ public class PersonalInfoServlet extends HttpServlet {
             requestStatus.setJustification("Demande en attente de traitement.");
 
             requestStatusService.save(requestStatus);
+            newRequest.getRequestStatuses().add(requestStatus);
 
             request.setAttribute("successMessage", "Votre demande a été soumise avec succès !");
         } catch (Exception e) {

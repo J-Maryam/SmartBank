@@ -208,6 +208,7 @@
         }
 
         .overlay {
+            display: none;
             position: fixed;
             top: 0;
             bottom: 0;
@@ -231,7 +232,7 @@
             border-radius: 5px;
             width: 30%;
             position: relative;
-            transition: all 5s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
 
         .popup h2 {
@@ -298,6 +299,7 @@
 
 <div class="table-container">
     <table>
+        <thead>
         <tr>
             <th>Client</th>
             <th>CIN</th>
@@ -315,59 +317,41 @@
             <th>Crédit (hasActivateCredits)</th>
             <th></th>
         </tr>
-        <c:forEach var="request" items="${requestList}">
+        </thead>
+        <tbody>
+        <c:if test="${not empty requestList}">
+            <c:forEach var="request" items="${requestList}">
+                <tr>
+                    <td>${request.firstName} ${request.lastName}</td>
+                    <td>${request.cin}</td>
+                    <td>${request.birthDate}</td>
+                    <td>${request.email}</td>
+                    <td>${request.phoneNumber}</td>
+                    <td>${request.civility}</td>
+                    <td>${request.type}</td>
+                    <td>${request.position}</td>
+                    <td>${request.startEmployementDate}</td>
+                    <td>${request.amount}</td>
+                    <td>${request.durationsInMonths}</td>
+                    <td>${request.monthlyIncome}</td>
+                    <td>${request.monthlyPayment}</td>
+                    <td>${request.hasActivateCredits}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="button" href="${pageContext.request.contextPath}/details?id=${request.id}">Détails</a>
+                            <a class="button update-status" href="#">Update Status</a>
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
+        </c:if>
+        <c:if test="${empty requestList}">
             <tr>
-                <td>${request.firstName} ${request.lastName}</td>
-                <td>${request.cin}</td>
-                <td>${request.birthDate}</td>
-                <td>${request.email}</td>
-                <td>${request.phoneNumber}</td>
-                <td>${request.civility}</td>
-                <td>${request.type}</td>
-                <td>${request.position}</td>
-                <td>${request.startEmployementDate}</td>
-                <td>${request.amount}</td>
-                <td>${request.durationsInMonths}</td>
-                <td>${request.monthlyIncome}</td>
-                <td>${request.monthlyPayment}</td>
-                <td>${request.hasActivateCredits}</td>
-                <td>
-                    <div class="btn-group">
-                        <form action="${pageContext.request.contextPath}/details">
-                            <a class="button" href="#popup1">Details</a>
-                        </form>
-                        <form>
-                            <a class="button" href="#popup2">Update Status</a>
-                        </form>
-                    </div>
-                </td>
+                <td colspan="15">Aucun crédit trouvé.</td>
             </tr>
-        </c:forEach>
+        </c:if>
+        </tbody>
     </table>
-</div>
-
-<%--list of request status--%>
-<div id="popup1" class="overlay">
-    <div class="popup">
-        <h3>Historiques de demande de crédit</h3>
-        <a class="close" href="#">&times;</a>
-        <div class="content">
-            <table>
-                <tr>
-                    <th>Demande</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>Justification</th>
-                </tr>
-                <tr>
-                    <td>Maison</td>
-                    <td>Refuse</td>
-                    <td>01/08/2024</td>
-                    <td>Cz</td>
-                </tr>
-            </table>
-        </div>
-    </div>
 </div>
 
 <%--for to modify request status--%>
@@ -396,6 +380,8 @@
 </div>
 
 </body>
+</html>
+<script src="assets/details.js"></script>
 
 <script>
     function myFunction() {
@@ -417,4 +403,4 @@
         }
     }
 </script>
-</html>
+
