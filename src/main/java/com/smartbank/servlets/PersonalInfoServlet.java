@@ -91,14 +91,10 @@ public class PersonalInfoServlet extends HttpServlet {
 
         try {
             requestService.save(newRequest);
-//            request.setAttribute("newRequest", newRequest);
-
-            Long requestId = newRequest.getId();
             Status status = statusService.findByStatus("En attente");
             if (status == null) {
                 throw new ServletException("Status not found");
             }
-            Long statusId = status.getId();
 
             RequestStatus requestStatus = new RequestStatus();
             requestStatus.setRequest(newRequest);

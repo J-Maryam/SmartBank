@@ -22,7 +22,7 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            max-width: 800px;
+            max-width: 880px;
             margin: 0 auto;
         }
 
@@ -33,26 +33,27 @@
         }
 
         th, td {
+            white-space: nowrap;
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
 
         th {
-            background-color: #02AFBC; /* Couleur d'arrière-plan des en-têtes */
+            background-color: #02AFBC;
             color: white;
         }
 
         tr:hover {
-            background-color: #FDDF35; /* Couleur d'arrière-plan lors du survol */
+            background-color: #FDDF35;
         }
 
         tr:nth-child(even) {
-            background-color: #f9f9f9; /* Couleur d'arrière-plan des lignes paires */
+            background-color: #f9f9f9;
         }
 
         tr:nth-child(odd) {
-            background-color: #fff; /* Couleur d'arrière-plan des lignes impaires */
+            background-color: #fff;
         }
 
         @media (max-width: 600px) {

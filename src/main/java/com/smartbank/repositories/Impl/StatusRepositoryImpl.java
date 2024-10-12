@@ -9,6 +9,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RequestScoped
@@ -45,6 +46,22 @@ public class StatusRepositoryImpl implements StatusRepository {
         }catch (Exception e) {
             e.printStackTrace();
             return null;
+        }finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public Optional<Status> findById(Long id) {
+        EntityManager em = EntityManagerProvider.getEntityManagerFactory().createEntityManager();
+        Status status = null;
+
+        try{
+            status = em.find(Status.class, id);
+            return Optional.ofNullable(status);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
         }finally {
             em.close();
         }

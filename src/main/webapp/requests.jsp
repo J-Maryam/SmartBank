@@ -277,12 +277,13 @@
     </div>
 
     <c:forEach var="request" items="${requestList}">
-        <div id="popup" class="popup" style="display: none;">
+        <div id="popup-${request.id}" class="popup" style="display: none;">
             <div class="popup-content">
-                <h2>Modifier le statut de la demande <span id="requestId"></span></h2>
+                <h2>Modifier le statut de la demande <span id="requestId-${request.id}"></span></h2>
                 <span class="close" onclick="closePopup(${request.id})">&times;</span>
                 <div class="content">
-                    <form class="updateForm" id="updateForm" method="post">
+                    <form class="updateForm" id="updateForm-${request.id}" method="post">
+                        <input type="hidden" name="request_id" value="${request.id}">
                         <label for="status">Statut</label>
                         <select id="status" name="status">
                             <c:forEach var="status" items="${statusList}">
