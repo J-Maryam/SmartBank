@@ -1,219 +1,132 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>List of Requests</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Demandes</title>
     <style>
         body {
-            padding: 2%;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f9;
+            color: #333;
         }
 
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
+        h1, h2 {
+            text-align: center;
+            color: #30435C;
+            margin: 20px 0;
+        }
+
+        .container {
+            width: 90%;
             margin: auto;
-        }
-
-        th {
-            /*border: 1px solid #dddddd;*/
-            background-color: #dddddd;
-            text-align: left;
-            padding: 12px;
-        }
-
-        td {
-            border-bottom: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
+            overflow: hidden;
         }
 
         .filter {
-            display: grid;
-            gap: 3%;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            margin: auto;
-            padding: 5%;
-        }
-
-        .dropbtn {
-            background-color: darkgray;
-            color: white;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
+            padding: 20px;
+            background-color: #02AFBC;
             border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .dropbtn:hover, .dropbtn:focus {
-            /*background-color: #3e8e41;*/
-        }
-
-        #myInput {
-            box-sizing: border-box;
-            /*background-image: url('searchicon.png');*/
-            background-position: 14px 12px;
-            background-repeat: no-repeat;
-            font-size: 16px;
-            padding: 14px 20px 12px 45px;
-            border: none;
-            border-bottom: 1px solid #ddd;
-        }
-
-        #myInput:focus {
-            outline: 3px solid #ddd;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f6f6f6;
-            min-width: 230px;
-            overflow: auto;
-            border: 1px solid #ddd;
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown a:hover {
-            background-color: #ddd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         .topnav {
-            overflow: hidden;
-            background-color: darkgray;
-            width: 40%;
-            border-radius: 10px;
-        }
-
-        .topnav a {
-            float: left;
-            display: block;
-            color: black;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-
-        .topnav a:hover {
-            /*background-color: #ddd;*/
-            color: black;
-        }
-
-        .topnav a.active {
-            /*background-color: #2196F3;*/
-            color: white;
-        }
-
-        .topnav .search-container {
-            float: right;
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
         }
 
         .topnav input[type=text] {
-            padding: 6px;
-            margin-top: 8px;
-            font-size: 17px;
-            border: none;
+            padding: 10px;
+            margin-left: 10px;
+            border: 1px solid #9B9B9B;
+            border-radius: 5px;
+            width: 250px;
         }
 
-        .topnav .search-container button {
-            float: right;
-            padding: 6px 10px;
-            margin-top: 8px;
-            margin-right: 16px;
-            background: #ddd;
-            font-size: 17px;
+        .topnav button {
+            padding: 10px;
+            margin-left: 10px;
+            background-color: #FDDF35;
+            color: black;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        .topnav .search-container button:hover {
-            background: #ccc;
-        }
-
-        .btn-group .button {
-            background-color: darkgray;
-            border: none;
-            border-radius: 10px;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .btn-group .button:hover {
-            background-color: gray;
+        .topnav button:hover {
+            background-color: #02AFBC;
         }
 
         .table-container {
             width: 100%;
-            margin: auto;
             overflow-x: auto;
-            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
-        h1 {
-            text-align: center;
-            font-family: Tahoma, Arial, sans-serif;
-            color: #06D85F;
-            margin: 80px 0;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: auto; /* S'assure que le tableau s'adapte à la largeur */
         }
 
-        .box {
-            width: 40%;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 35px;
-            border: 2px solid #fff;
-            border-radius: 20px/50px;
-            background-clip: padding-box;
-            text-align: center;
+        th, td {
+            white-space: nowrap;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #02AFBC;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
         }
 
         .button {
-            font-size: 1em;
-            padding: 10px;
-            color: #fff;
-            border: 2px solid #06D85F;
-            border-radius: 20px/50px;
-            text-decoration: none;
+            background-color: #FDDF35;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s ease-out;
+            transition: background-color 0.3s;
+            text-decoration: none; /* Pour retirer le soulignement des liens */
+            text-align: center; /* Centrer le texte dans les boutons */
         }
 
         .button:hover {
-            background: #06D85F;
+            background-color: #02AFBC;
         }
 
+        /* Styles pour la popup */
         .overlay {
             display: none;
             position: fixed;
             top: 0;
-            bottom: 0;
             left: 0;
             right: 0;
+            bottom: 0;
             background: rgba(0, 0, 0, 0.7);
             transition: opacity 500ms;
             visibility: hidden;
@@ -226,162 +139,166 @@
         }
 
         .popup {
-            margin: 70px auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
             padding: 20px;
-            background: #fff;
-            border-radius: 5px;
-            width: 30%;
-            position: relative;
-            transition: all 0.3s ease-in-out;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .popup h2 {
             margin-top: 0;
-            color: #333;
-            font-family: Tahoma, Arial, sans-serif;
+            color: #30435C;
         }
 
         .popup .close {
             position: absolute;
-            top: 20px;
-            right: 30px;
-            transition: all 200ms;
-            font-size: 30px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #333;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #30435C;
         }
 
         .popup .close:hover {
-            color: #06D85F;
-        }
-
-        .popup .content {
-            max-height: 30%;
-            overflow: auto;
+            color: #02AFBC;
         }
 
         .updateForm {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .updateForm input[type="text"],
+        .updateForm select {
+            padding: 10px;
+            border: 1px solid #9B9B9B;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .updateForm input[type="submit"] {
+            background-color: #02AFBC;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .updateForm input[type="submit"]:hover {
+            background-color: #FDDF35;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+
+            .topnav input[type=text] {
+                width: 100%; /* Adaptation de la largeur sur mobile */
+            }
         }
     </style>
 </head>
 <body>
-
-<div class="filter">
-    <div class="topnav">
-        <a class="active">Filter by Date: </a>
-        <div class="search-container">
-            <form>
-                <input type="text" placeholder="Search.." name="search">
-                <button type="submit"><i class="fa fa-search"></i>Search</button>
-            </form>
+<div class="container">
+    <h3>Liste des demandes</h3>
+    <div class="filter">
+        <div class="topnav">
+            <label for="search">Filtrer par date: </label>
+            <input type="text" id="search" placeholder="Rechercher...">
+            <button type="submit">Rechercher</button>
         </div>
     </div>
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-        <div id="myDropdown" class="dropdown-content">
-            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-            <a href="#about">About</a>
-            <a href="#base">Base</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
-            <a href="#custom">Custom</a>
-            <a href="#support">Support</a>
-            <a href="#tools">Tools</a>
-        </div>
-    </div>
-</div>
 
-<h2>Request List</h2>
-
-<div class="table-container">
-    <table>
-        <thead>
-        <tr>
-            <th>Client</th>
-            <th>CIN</th>
-            <th>Date de naissance</th>
-            <th>Email</th>
-            <th>Téléphone</th>
-            <th>Civilité</th>
-            <th>Type de demande</th>
-            <th>Position</th>
-            <th>Date d'embauche/Début de l'activité</th>
-            <th>Montant</th>
-            <th>Durée</th>
-            <th>Mensualités (en DH)</th>
-            <th>Total revenus mensuels (en DH)</th>
-            <th>Crédit (hasActivateCredits)</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:if test="${not empty requestList}">
-            <c:forEach var="request" items="${requestList}">
-                <tr>
-                    <td>${request.firstName} ${request.lastName}</td>
-                    <td>${request.cin}</td>
-                    <td>${request.birthDate}</td>
-                    <td>${request.email}</td>
-                    <td>${request.phoneNumber}</td>
-                    <td>${request.civility}</td>
-                    <td>${request.type}</td>
-                    <td>${request.position}</td>
-                    <td>${request.startEmployementDate}</td>
-                    <td>${request.amount}</td>
-                    <td>${request.durationsInMonths}</td>
-                    <td>${request.monthlyIncome}</td>
-                    <td>${request.monthlyPayment}</td>
-                    <td>${request.hasActivateCredits}</td>
-                    <td>
-                        <div class="btn-group">
-                            <a class="button" href="${pageContext.request.contextPath}/details?id=${request.id}">Détails</a>
-                            <a class="button update-status" href="#">Update Status</a>
-                        </div>
-                    </td>
-                </tr>
-            </c:forEach>
-        </c:if>
-        <c:if test="${empty requestList}">
+    <div class="table-container">
+        <table>
+            <thead>
             <tr>
-                <td colspan="15">Aucun crédit trouvé.</td>
+                <th>Client</th>
+                <th>CIN</th>
+                <th>Date de naissance</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Civilité</th>
+                <th>Type de demande</th>
+                <th>Position</th>
+                <th>Date d'embauche/Début de l'activité</th>
+                <th>Montant</th>
+                <th>Durée</th>
+                <th>Mensualités (en DH)</th>
+                <th>Total revenus mensuels (en DH)</th>
+                <th>Crédit (hasActivateCredits)</th>
+                <th>Actions</th>
             </tr>
-        </c:if>
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+            <c:if test="${not empty requestList}">
+                <c:forEach var="request" items="${requestList}">
+                    <tr>
+                        <td>${request.firstName} ${request.lastName}</td>
+                        <td>${request.cin}</td>
+                        <td>${request.birthDate}</td>
+                        <td>${request.email}</td>
+                        <td>${request.phoneNumber}</td>
+                        <td>${request.civility}</td>
+                        <td>${request.type}</td>
+                        <td>${request.position}</td>
+                        <td>${request.startEmployementDate}</td>
+                        <td>${request.amount}</td>
+                        <td>${request.durationsInMonths}</td>
+                        <td>${request.monthlyIncome}</td>
+                        <td>${request.monthlyPayment}</td>
+                        <td>${request.hasActivateCredits}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="button" href="${pageContext.request.contextPath}/details?id=${request.id}">Détails</a>
+                                <a class="button update-status" href="#popup2">Modifier le statut</a>
+                            </div>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty requestList}">
+                <tr>
+                    <td colspan="15" style="text-align: center;">Aucune demande trouvée.</td>
+                </tr>
+            </c:if>
+            </tbody>
+        </table>
+    </div>
 
-<%--for to modify request status--%>
-<div id="popup2" class="overlay">
-    <div class="popup">
-        <h3>Modifier la statut de la demande</h3>
-        <a class="close" href="#">&times;</a>
-        <div class="content">
-            <div class="updateForm">
-                <form>
-                    <label for="status">Country</label>
+    <div id="popup2" class="overlay">
+        <div class="popup">
+            <h2>Modifier la statut de la demande</h2>
+            <span class="close" onclick="document.getElementById('popup2').style.display='none'">&times;</span>
+            <div class="content">
+                <form class="updateForm">
+                    <label for="status">Statut</label>
                     <select id="status" name="status">
                         <option value="pending">En attente</option>
                         <option value="accepted">Accepté</option>
                         <option value="refused">Refusé</option>
                     </select>
 
-                    <label for="justification">First Name</label>
-                    <input type="text" id="justification" name="justification" placeholder="Your justification..">
+                    <label for="justification">Justification</label>
+                    <input type="text" id="justification" name="justification" required>
 
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Mettre à jour">
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>
-<script src="assets/details.js"></script>
 
 <script>
     function myFunction() {

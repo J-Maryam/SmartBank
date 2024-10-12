@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
+  <title>Hello World</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,7 +13,7 @@
     }
 
     h1 {
-      color: #333;
+      color: #02AFBC; /* Couleur mise à jour du titre */
       margin-bottom: 30px;
     }
 
@@ -22,7 +22,7 @@
     }
 
     button {
-      background-color: #4CAF50; /* Couleur de fond verte */
+      background-color: #02AFBC; /* Couleur de fond mise à jour */
       color: white; /* Texte en blanc */
       padding: 10px 20px; /* Rembourrage */
       border: none; /* Pas de bordure */
@@ -33,7 +33,7 @@
     }
 
     button:hover {
-      background-color: #45a049; /* Couleur de fond au survol */
+      background-color: #FDDF35; /* Couleur de fond au survol mise à jour */
     }
 
     button:focus {

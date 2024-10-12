@@ -12,7 +12,7 @@
         }
 
         h3 {
-            color: #333;
+            color: #02AFBC; /* Couleur du titre */
             text-align: center;
             margin-bottom: 20px;
         }
@@ -39,20 +39,20 @@
         }
 
         th {
-            background-color: #4CAF50;
+            background-color: #02AFBC; /* Couleur d'arrière-plan des en-têtes */
             color: white;
         }
 
         tr:hover {
-            background-color: #f1f1f1;
+            background-color: #FDDF35; /* Couleur d'arrière-plan lors du survol */
         }
 
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #f9f9f9; /* Couleur d'arrière-plan des lignes paires */
         }
 
         tr:nth-child(odd) {
-            background-color: #fff;
+            background-color: #fff; /* Couleur d'arrière-plan des lignes impaires */
         }
 
         @media (max-width: 600px) {
