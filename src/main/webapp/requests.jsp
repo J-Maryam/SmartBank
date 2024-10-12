@@ -279,7 +279,7 @@
     <c:forEach var="request" items="${requestList}">
         <div id="popup-${request.id}" class="popup" style="display: none;">
             <div class="popup-content">
-                <h2>Modifier le statut de la demande <span id="requestId-${request.id}"></span></h2>
+                <h2>Modifier le statut de la demande></h2>
                 <span class="close" onclick="closePopup(${request.id})">&times;</span>
                 <div class="content">
                     <form class="updateForm" id="updateForm-${request.id}" method="post">
@@ -302,28 +302,8 @@
     </c:forEach>
 
 </div>
-<script src="assets/details.js"></script>
-<script>
+<script src="assets/js/details.js"></script>
 
-    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    function filterFunction() {
-        const input = document.getElementById("myInput");
-        const filter = input.value.toUpperCase();
-        const div = document.getElementById("myDropdown");
-        const a = div.getElementsByTagName("a");
-        for (let i = 0; i < a.length; i++) {
-            txtValue = a[i].textContent || a[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-            } else {
-                a[i].style.display = "none";
-            }
-        }
-    }
-</script>
 </body>
 </html>
 

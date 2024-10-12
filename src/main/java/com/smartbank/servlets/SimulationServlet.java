@@ -14,7 +14,7 @@ public class SimulationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String projectType = request.getParameter("projectType");
         String position = request.getParameter("position");
-        String amount = request.getParameter("amount");
+        Long amount = Long.parseLong(request.getParameter("amount"));
         int durationsInMonths = Integer.parseInt(request.getParameter("durationsInMonths"));
         Double monthlyIncome = Double.parseDouble(request.getParameter("monthlyIncome"));
 

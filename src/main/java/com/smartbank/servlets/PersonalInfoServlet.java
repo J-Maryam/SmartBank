@@ -3,15 +3,10 @@ package com.smartbank.servlets;
 import com.smartbank.models.Request;
 import com.smartbank.models.RequestStatus;
 import com.smartbank.models.Status;
-import com.smartbank.repositories.Impl.RequestRepositoryImpl;
-import com.smartbank.repositories.RequestRepository;
 import com.smartbank.services.RequestService;
 import com.smartbank.services.RequestStatusService;
-import com.smartbank.services.ServiceImpl.RequestServiceImpl;
-import com.smartbank.services.ServiceImpl.RequestStatusServiceImpl;
 import com.smartbank.services.StatusService;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -42,7 +37,7 @@ public class PersonalInfoServlet extends HttpServlet {
 
         String projectType = (String) session.getAttribute("projectType");
         String position = (String) session.getAttribute("position");
-        String amount = (String) session.getAttribute("amount");
+        Long amount = (Long) session.getAttribute("amount");
         int durationInMonths = (Integer) session.getAttribute("durationsInMonths");
         Double monthlyIncome = (Double) session.getAttribute("monthlyIncome");
         String email = (String) session.getAttribute("email");
@@ -58,8 +53,7 @@ public class PersonalInfoServlet extends HttpServlet {
         LocalDate birthDate = LocalDate.parse(birthDateStr, formatter);
         String startEmployementDateStr = request.getParameter("startEmployementDate");
         LocalDate startEmployementDate = LocalDate.parse(startEmployementDateStr, formatter);
-        String monthlyPaymentStr = request.getParameter("monthlyPayment");
-        BigDecimal monthlyPayment = new BigDecimal(monthlyPaymentStr);
+        BigDecimal monthlyPayment = new BigDecimal(request.getParameter("monthlyPayment"));
         boolean hasActivateCredits = Boolean.parseBoolean(request.getParameter("hasActivateCredits"));
 
         System.out.println("Civility: " + civility);
@@ -111,6 +105,6 @@ public class PersonalInfoServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Une erreur est survenue lors de la soumission de votre demande.");
         }
 
-        request.getRequestDispatcher("step3.jsp").forward(request, response);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

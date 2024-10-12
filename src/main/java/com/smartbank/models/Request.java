@@ -8,14 +8,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-//public class Request implements Serializable {
-public class Request  {
-
+public class Request implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,14 +58,15 @@ public class Request  {
 
     @NotNull(message = "Montant doit pas être null")
     @Positive(message = "Le montant doit être positive")
-    private String amount;
+    private Long amount;
 
     @Min(value = 12, message = "Duration must be at least 12 month")
     @NotNull(message = "DurationsInMonths ne doit pas être null")
     private int durationsInMonths;
 
     @NotNull(message = "Monthly payment ne doit pas être null")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Monthly payment doit être superieure à 0")
+    @DecimalMin(value = "0.0", inclusive = true, message = "La mensualité doit être un nombre positif")
+    @Digits(integer = 10, fraction = 2, message = "La mensualité doit être un nombre avec au maximum deux décimales")
     private BigDecimal monthlyPayment;
 
     @OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
@@ -85,7 +82,7 @@ public class Request  {
 
     public Request() {}
 
-    public Request(Long id, String firstName, String lastName, String cin, LocalDate birthDate, LocalDate startEmployementDate, Double monthlyIncome, Boolean hasActivateCredits, String email, String phoneNumber, String civility, String type, String position, String amount, int durationsInMonths, BigDecimal monthlyPayment) {
+    public Request(Long id, String firstName, String lastName, String cin, LocalDate birthDate, LocalDate startEmployementDate, Double monthlyIncome, Boolean hasActivateCredits, String email, String phoneNumber, String civility, String type, String position, Long amount, int durationsInMonths, BigDecimal monthlyPayment) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -208,11 +205,11 @@ public class Request  {
         this.position = position;
     }
 
-    public String getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 

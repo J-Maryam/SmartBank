@@ -15,9 +15,6 @@ import java.util.Optional;
 @RequestScoped
 public class RequestRepositoryImpl implements RequestRepository {
 
-    @Inject
-    private StatusService statusService;
-
     @Override
     public void save(Request request) {
         EntityManager em = EntityManagerProvider.getEntityManagerFactory().createEntityManager();
