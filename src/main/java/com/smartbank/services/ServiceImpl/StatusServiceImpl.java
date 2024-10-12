@@ -7,6 +7,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
+import java.util.List;
+
 @RequestScoped
 public class StatusServiceImpl implements StatusService {
 
@@ -27,6 +29,11 @@ public class StatusServiceImpl implements StatusService {
 
     public Status findByStatus(String status) {
         return statusRepository.findByStatus(status);
+    }
+
+    @Override
+    public List<Status> findAll() {
+        return statusRepository.findAll();
     }
 
     public void insertStatusIfNotExist(String status) {

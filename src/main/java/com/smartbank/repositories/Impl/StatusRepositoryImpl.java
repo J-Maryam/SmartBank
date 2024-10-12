@@ -8,6 +8,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
+import java.util.List;
+
+
 @RequestScoped
 public class StatusRepositoryImpl implements StatusRepository {
 
@@ -45,5 +48,20 @@ public class StatusRepositoryImpl implements StatusRepository {
         }finally {
             em.close();
         }
+    }
+
+    @Override
+    public List<Status> findAll() {
+        EntityManager em = EntityManagerProvider.getEntityManagerFactory().createEntityManager();
+        List<Status> statusList = null;
+
+        try {
+            statusList = em.createQuery("select s from Status s", Status.class).getResultList();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            em.close();
+        }
+        return statusList;
     }
 }

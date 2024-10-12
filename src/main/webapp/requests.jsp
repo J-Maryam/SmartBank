@@ -79,7 +79,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            table-layout: auto; /* S'assure que le tableau s'adapte à la largeur */
+            table-layout: auto;
         }
 
         th, td {
@@ -111,8 +111,8 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            text-decoration: none; /* Pour retirer le soulignement des liens */
-            text-align: center; /* Centrer le texte dans les boutons */
+            text-decoration: none;
+            text-align: center;
         }
 
         .button:hover {
@@ -121,7 +121,7 @@
 
         /* Styles pour la popup */
         .overlay {
-            display: none;
+            /*display: none;*/
             position: fixed;
             top: 0;
             left: 0;
@@ -146,7 +146,7 @@
             background: white;
             padding: 20px;
             border-radius: 10px;
-            width: 300px;
+            width: 350px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
@@ -179,7 +179,6 @@
             padding: 10px;
             border: 1px solid #9B9B9B;
             border-radius: 5px;
-            width: 100%;
         }
 
         .updateForm input[type="submit"] {
@@ -202,7 +201,7 @@
             }
 
             .topnav input[type=text] {
-                width: 100%; /* Adaptation de la largeur sur mobile */
+                width: 100%;
             }
         }
     </style>
@@ -283,9 +282,9 @@
                 <form class="updateForm">
                     <label for="status">Statut</label>
                     <select id="status" name="status">
-                        <option value="pending">En attente</option>
-                        <option value="accepted">Accepté</option>
-                        <option value="refused">Refusé</option>
+                        <c:forEach var="status" items="${statusList}">
+                            <option value="${status.id}">${status.status}</option>
+                        </c:forEach>
                     </select>
 
                     <label for="justification">Justification</label>
@@ -296,6 +295,7 @@
             </div>
         </div>
     </div>
+
 </div>
 </body>
 </html>

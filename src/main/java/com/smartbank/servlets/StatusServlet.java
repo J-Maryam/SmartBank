@@ -2,7 +2,7 @@ package com.smartbank.servlets;
 
 import com.smartbank.models.Status;
 import com.smartbank.services.StatusService;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@RequestScoped
+@ApplicationScoped
 public class StatusServlet extends HttpServlet {
 
     @Inject
