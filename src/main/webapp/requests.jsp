@@ -120,17 +120,17 @@
         }
 
         /* Styles pour la popup */
-        .overlay {
-            /*display: none;*/
-            position: fixed;
-            top: 0;
+        .popup {
+            display: none; /* Masquer la popup par défaut */
+            position: fixed; /* Rester au même endroit dans la fenêtre */
+            z-index: 1000; /* Assurez-vous qu'elle soit au-dessus des autres éléments */
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            transition: opacity 500ms;
-            visibility: hidden;
-            opacity: 0;
+            top: 0;
+            width: 100%; /* Plein écran */
+            height: 100%; /* Plein écran */
+            overflow: auto; /* Activer le défilement si nécessaire */
+            background-color: rgb(0,0,0); /* Fond noir */
+            background-color: rgba(0,0,0,0.4); /* Avec transparence */
         }
 
         .overlay:target {
@@ -138,7 +138,7 @@
             opacity: 1;
         }
 
-        .popup {
+        .popup-content {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -150,12 +150,12 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .popup h2 {
+        .popup-content h2 {
             margin-top: 0;
             color: #30435C;
         }
 
-        .popup .close {
+        .popup-content .close {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -164,7 +164,7 @@
             color: #30435C;
         }
 
-        .popup .close:hover {
+        .popup-content .close:hover {
             color: #02AFBC;
         }
 
@@ -259,7 +259,9 @@
                         <td>
                             <div class="btn-group">
                                 <a class="button" href="${pageContext.request.contextPath}/details?id=${request.id}">Détails</a>
-                                <a class="button update-status" href="#popup2">Modifier le statut</a>
+                                <button class="button update-status" onclick="openPopup(${request.id}, '${pageContext.request.contextPath}/updateStatus?id=${request.id}')">
+                                    Modifier le statut
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -274,33 +276,34 @@
         </table>
     </div>
 
-    <div id="popup2" class="overlay">
-        <div class="popup">
-            <h2>Modifier la statut de la demande</h2>
-            <span class="close" onclick="document.getElementById('popup2').style.display='none'">&times;</span>
-            <div class="content">
-                <form class="updateForm">
-                    <label for="status">Statut</label>
-                    <select id="status" name="status">
-                        <c:forEach var="status" items="${statusList}">
-                            <option value="${status.id}">${status.status}</option>
-                        </c:forEach>
-                    </select>
+    <c:forEach var="request" items="${requestList}">
+        <div id="popup" class="popup" style="display: none;">
+            <div class="popup-content">
+                <h2>Modifier le statut de la demande <span id="requestId"></span></h2>
+                <span class="close" onclick="closePopup(${request.id})">&times;</span>
+                <div class="content">
+                    <form class="updateForm" id="updateForm" method="post">
+                        <label for="status">Statut</label>
+                        <select id="status" name="status">
+                            <c:forEach var="status" items="${statusList}">
+                                <option value="${status.id}">${status.status}</option>
+                            </c:forEach>
+                        </select>
 
-                    <label for="justification">Justification</label>
-                    <input type="text" id="justification" name="justification" required>
+                        <label for="justification">Justification</label>
+                        <input type="text" id="justification" name="justification" required>
 
-                    <input type="submit" value="Mettre à jour">
-                </form>
+                        <input type="submit" value="Mettre à jour">
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </c:forEach>
 
 </div>
-</body>
-</html>
-
+<script src="assets/details.js"></script>
 <script>
+
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
@@ -320,4 +323,6 @@
         }
     }
 </script>
+</body>
+</html>
 
