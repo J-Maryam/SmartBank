@@ -1,10 +1,9 @@
-package com.smartbank.services.ServiceImpl;
+package com.smartbank.services.Impl;
 
 import com.smartbank.models.RequestStatus;
 import com.smartbank.repositories.RequestStatusRepository;
 import com.smartbank.services.RequestStatusService;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
 import java.util.List;

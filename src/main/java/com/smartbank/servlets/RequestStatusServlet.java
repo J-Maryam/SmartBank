@@ -3,14 +3,8 @@
     import com.smartbank.models.Request;
     import com.smartbank.models.RequestStatus;
     import com.smartbank.models.Status;
-    import com.smartbank.repositories.Impl.RequestStatusRepositoryImpl;
-    import com.smartbank.repositories.RequestStatusRepository;
     import com.smartbank.services.RequestService;
     import com.smartbank.services.RequestStatusService;
-    import com.smartbank.services.ServiceImpl.RequestStatusServiceImpl;
-    import com.smartbank.services.StatusService;
-    import jakarta.enterprise.context.ApplicationScoped;
-    import jakarta.enterprise.context.RequestScoped;
     import jakarta.inject.Inject;
     import jakarta.servlet.ServletException;
     import jakarta.servlet.annotation.WebServlet;

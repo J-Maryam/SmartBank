@@ -1,10 +1,8 @@
 package com.smartbank;
 
 import com.smartbank.models.Request;
-import com.smartbank.repositories.Impl.RequestRepositoryImpl;
-import com.smartbank.repositories.RequestRepository;
 import com.smartbank.services.RequestService;
-import com.smartbank.services.ServiceImpl.RequestServiceImpl;
+import com.smartbank.services.Impl.RequestServiceImpl;
 
 public class Main {
     public static void main(String[] args) {

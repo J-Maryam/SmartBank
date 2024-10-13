@@ -1,4 +1,4 @@
-package com.smartbank.services.ServiceImpl;
+package com.smartbank.services.Impl;
 
 import com.smartbank.models.Status;
 import com.smartbank.repositories.StatusRepository;
