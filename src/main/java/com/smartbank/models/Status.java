@@ -22,7 +22,6 @@ public class Status implements Serializable {
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL)
     private List<RequestStatus> requestStatuses = new ArrayList<>();
-//    private Set<RequestStatus> requestStatuses = new HashSet<>();
     public Status() {}
 
     public Status(Long id, String status) {
@@ -54,10 +53,4 @@ public class Status implements Serializable {
         this.requestStatuses = requestStatuses;
     }
 
-//    public Set<RequestStatus> getRequestStatuses() {
-//        return requestStatuses;
-//    }
-//    public void setRequestStatuses(Set<RequestStatus> requestStatuses) {
-//        this.requestStatuses = requestStatuses;
-//    }
 }

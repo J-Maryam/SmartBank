@@ -8,7 +8,9 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,5 +65,22 @@ public class RequestRepositoryImpl implements RequestRepository {
         }finally {
             em.close();
         }
+    }
+
+    @Override
+    public List<Request> findByDateAndStatus(LocalDate date, Long statusId) {
+        List<Request> requests;
+        String jpql = "select r from Request r join r.requestStatuses rs where rs.status.id = :statusId and rs.StatusDate = :date";
+        EntityManager em = EntityManagerProvider.getEntityManagerFactory().createEntityManager();
+
+        try{
+            TypedQuery<Request> query = em.createQuery(jpql, Request.class);
+            query.setParameter("statusId", statusId);
+            query.setParameter("date", date);
+            requests = query.getResultList();
+        }finally {
+            em.close();
+        }
+        return requests;
     }
 }

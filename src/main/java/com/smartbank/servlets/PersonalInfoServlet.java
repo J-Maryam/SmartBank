@@ -98,6 +98,7 @@ public class PersonalInfoServlet extends HttpServlet {
 
             requestStatusService.save(requestStatus);
             newRequest.getRequestStatuses().add(requestStatus);
+            status.getRequestStatuses().add(requestStatus);
 
             request.setAttribute("successMessage", "Votre demande a été soumise avec succès !");
         } catch (Exception e) {

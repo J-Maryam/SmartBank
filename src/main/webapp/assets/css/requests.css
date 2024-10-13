@@ -20,7 +20,7 @@ h1, h2 {
 
 .filter {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 20px;
     background-color: #02AFBC;
@@ -33,19 +33,38 @@ h1, h2 {
     display: flex;
     align-items: center;
     flex-grow: 1;
+    gap: 20px;
 }
 
-.topnav input[type=text] {
+.topnav label {
+    font-weight: bold;
+    color: white;
+}
+
+.date-input {
     padding: 10px;
     margin-left: 10px;
     border: 1px solid #9B9B9B;
     border-radius: 5px;
     width: 250px;
+    transition: border-color 0.3s;
 }
 
-.topnav button {
+.date-input:focus {
+    border-color: #FDDF35;
+    outline: none;
+}
+
+.status-select {
     padding: 10px;
-    margin-left: 10px;
+    border: 1px solid #9B9B9B;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-button {
+    padding: 10px 20px;
     background-color: #FDDF35;
     color: black;
     border: none;
@@ -54,7 +73,7 @@ h1, h2 {
     transition: background-color 0.3s;
 }
 
-.topnav button:hover {
+.search-button:hover {
     background-color: #02AFBC;
 }
 

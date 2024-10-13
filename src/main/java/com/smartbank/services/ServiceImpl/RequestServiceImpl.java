@@ -12,6 +12,7 @@ import jakarta.validation.ValidatorFactory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -63,24 +64,10 @@ public class RequestServiceImpl implements RequestService {
         return optionalRequest.orElse(null);
     }
 
-//    public BigDecimal calculerMensualite(Long capital, int dureeEnMois) {
-//        // Vérification que la durée est supérieure à 0
-//        if (dureeEnMois <= 0) {
-//            throw new IllegalArgumentException("La durée doit être supérieure à 0 mois.");
-//        }
-//
-//        // Définir le taux d'intérêt annuel
-//        double tauxAnnuel = 0.12; // 12%
-//
-//        // Calculer le taux mensuel
-//        double tauxMensuel = tauxAnnuel / 12;
-//
-//        // Calculer la mensualité en utilisant les opérations mathématiques explicites
-//        double mensualite = (capital * tauxMensuel) / (1 - Math.pow(1 + tauxMensuel, -dureeEnMois));
-//
-//        // Arrondir à deux décimales et retourner
-//        return BigDecimal.valueOf(mensualite).setScale(2, RoundingMode.HALF_UP);
-//    }
+    @Override
+    public List<Request> filterRequests(LocalDate date, Long statusId) {
+        return requestRepository.findByDateAndStatus(date, statusId);
+    }
 
     public BigDecimal calculerMensualite(Long capital, int dureeEnMois) {
         // Vérification que le capital et la durée sont valides
@@ -95,14 +82,5 @@ public class RequestServiceImpl implements RequestService {
         double mensualite = (capital * tauxMensuel) / (1 - Math.pow(1 + tauxMensuel, -dureeEnMois));
 
         return BigDecimal.valueOf(mensualite).setScale(2, RoundingMode.HALF_UP);
-    }
-
-
-
-    private void validateRequest(Request request) {
-        // Validation de la durée en mois
-        if (request.getDurationsInMonths() <= 0) {
-            throw new IllegalArgumentException("La durée doit être supérieure à 0 mois.");
-        }
     }
 }

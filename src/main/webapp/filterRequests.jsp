@@ -56,8 +56,8 @@
             </tr>
             </thead>
             <tbody>
-            <c:if test="${not empty requestList}">
-                <c:forEach var="request" items="${requestList}">
+            <c:if test="${not empty filterRequests}">
+                <c:forEach var="request" items="${filterRequests}">
                     <tr>
                         <td>${request.firstName} ${request.lastName}</td>
                         <td>${request.cin}</td>
@@ -84,7 +84,7 @@
                     </tr>
                 </c:forEach>
             </c:if>
-            <c:if test="${empty requestList}">
+            <c:if test="${empty filterRequests}">
                 <tr>
                     <td colspan="15" style="text-align: center;">Aucune demande trouvée.</td>
                 </tr>
@@ -93,7 +93,7 @@
         </table>
     </div>
 
-    <c:forEach var="request" items="${requestList}">
+    <c:forEach var="request" items="${filterRequests}">
         <div id="popup-${request.id}" class="popup" style="display: none;">
             <div class="popup-content">
                 <h2>Modifier le statut de la demande <span id="requestId-${request.id}"></span></h2>
