@@ -62,7 +62,7 @@ Chaque demande de crédit est caractérisée par :
 ### Étapes d'installation
 1. **Cloner le projet GitHub** :
    ```bash
-   [git clone https://github.com/your-repo/simulation-credit.git](https://github.com/J-Maryam/SmartBank.git)
+   https://github.com/J-Maryam/SmartBank.git
    ```
 
 2. **Configurer la base de données** :
@@ -77,7 +77,7 @@ Chaque demande de crédit est caractérisée par :
    - Copier le fichier WAR généré dans le répertoire `webapps` de Tomcat.
 
 5. **Démarrer Tomcat** :
-   - Accéder à l'application via `[http://localhost:8080/simulation-credit](http://localhost:8080/SmartBank_war/)`.
+   - Accéder à l'application via `http://localhost:8080/SmartBank_war/`.
 
 ### Utilisation
 - Accéder à l'application depuis un navigateur.
