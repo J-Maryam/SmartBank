@@ -279,7 +279,7 @@
     <c:forEach var="request" items="${requestList}">
         <div id="popup-${request.id}" class="popup" style="display: none;">
             <div class="popup-content">
-                <h2>Modifier le statut de la demande></h2>
+                <h2>Modifier le statut de la demande <span id="requestId-${request.id}"></span></h2>
                 <span class="close" onclick="closePopup(${request.id})">&times;</span>
                 <div class="content">
                     <form class="updateForm" id="updateForm-${request.id}" method="post">
